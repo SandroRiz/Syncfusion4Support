@@ -3,14 +3,14 @@
 @using Syncfusion.Blazor
 @using Syncfusion.Blazor.Popups
 @using Syncfusion.Blazor.Buttons
-@inject SfDialogService DialogService
+
 <PageTitle>Dialog</PageTitle>
 <h2>Dialog</h2>
 <br />
 <div id="ControlRegion" style="height:300px">
     <div class="col-lg-12 control-section">
         <button id="normalbtn" class="e-btn open-btn" @onclick="@OnBtnClick">Open</button>
-        <button id="normalbtn" class="e-btn open-btn" @onclick="@OnBtn2Click">Open Dialog Service</button>
+
         <SfDialog @bind-Visible="isVisible" Width="500px" AllowDragging="true" EnableResize="true" IsModal="true" ShowCloseIcon="true">
             <DialogTemplates>
                 <Header> About SYNCFUSION succinctly series </Header>
@@ -23,8 +23,6 @@
         </SfDialog>
     </div>
 </div>
-<br />
-<div class="status" style="padding-top:10px">@DialogStatus</div>
 <br />
 <div>
     <h3>Selected Features:</h3>
@@ -84,16 +82,12 @@
     }
 </style>
 @code {
-    private string DialogStatus { get; set; }
+
     private bool isVisible { get; set; } = false;
     private void OnBtnClick()
     {
         this.isVisible = true;
     }
 
-    private async Task OnBtn2Click()
-    {
-        await DialogService.AlertAsync("10% of battery remaining", "Low Battery");
-        this.DialogStatus = "The user closed the Alert dialog";
-    }
+   
 }

@@ -1,0 +1,27 @@
+﻿@page "/dialogservice-features"
+@rendermode InteractiveServer
+@using Syncfusion.Blazor
+@using Syncfusion.Blazor.Popups
+@using Syncfusion.Blazor.Buttons
+@inject SfDialogService DialogService
+<PageTitle>Dialog</PageTitle>
+<h2>Dialog</h2>
+<br />
+<div id="ControlRegion" style="height:300px">
+    <div class="col-lg-12 control-section">
+        <button id="normalbtn" class="e-btn open-btn" @onclick="@OnBtnClick">Open</button>
+    </div>
+</div>
+<br />
+<div class="status" style="padding-top:10px">@DialogStatus</div>
+
+@code {
+    private string DialogStatus { get; set; }
+ 
+
+    private async Task OnBtnClick()
+    {
+        await DialogService.AlertAsync("10% of battery remaining", "Low Battery");
+        this.DialogStatus = "The user closed the Alert dialog";
+    }
+}
