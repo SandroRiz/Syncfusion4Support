@@ -13,7 +13,7 @@ builder.Services.AddScoped<SfDialogService>();
 
 var app = builder.Build();
 //Register Syncfusion license https://help.syncfusion.com/common/essential-studio/licensing/how-to-generate
-//Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("YOUR LICENSE KEY");
+Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(builder.Configuration["SyncfusionLicense"]);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
