@@ -1,0 +1,55 @@
+﻿@page "/dialog-validation-dataform"
+@rendermode InteractiveServer
+@using System.ComponentModel.DataAnnotations
+<h3>DialogValidation</h3>
+
+<SfButton OnClick="@OpenDialog">Open Dialog</SfButton>
+<SfDialog Width="500px" ShowCloseIcon="true" @bind-Visible="Visibility">
+    <DialogTemplates>
+        <Header>
+            <h4 class="modal-title">Employee Details</h4>
+        </Header>
+        <Content>
+            <SfDataForm Model="@editorModel" OnValidSubmit="OkClick" ButtonsAlignment="FormButtonsAlignment.Right">
+                <FormValidator>
+                    <DataAnnotationsValidator />
+                </FormValidator>
+                <FormItems>
+                    <FormItem Field="@nameof(editorModel.Name)" ID="name"></FormItem>
+                    
+                </FormItems>
+            </SfDataForm>
+        </Content>
+    </DialogTemplates>
+    <DialogButtons>
+        <DialogButton Content="Save" IsPrimary="true" OnClick="@OkClick" />
+        <DialogButton Content="Cancel" OnClick="@CancelClick" />
+    </DialogButtons>
+</SfDialog>
+<div>
+    Name: @editorModel.Name
+</div>
+@code {
+    private EditorModel editorModel = new EditorModel();
+    private bool Visibility { get; set; }
+    public class EditorModel
+    {
+        [Required(ErrorMessage = "Enter employee name.")]
+        [MinLength(3, ErrorMessage = "Name should have more than 2 characters.")]
+        public string Name { get; set; }
+    }
+    void OpenDialog()
+    {
+        this.Visibility = true;
+    }
+    private void CancelClick()
+    {
+
+        this.Visibility = false;
+    }
+    private void OkClick()
+    {
+        //process only if name not empty
+        this.Visibility = false;
+    }
+}
